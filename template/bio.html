@@ -1,0 +1,90 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="main-container">
+    <h1 class="title">
+        Generate Your <span class="highlight">Instagram</span> Bio
+    </h1>
+
+    <div class="card">
+        <div class="form-group">
+            <label for="post-content">What's your bio about?</label>
+            <textarea 
+                id="post-content" 
+                placeholder="E.g. I'm a travel photographer who loves coffee, sunsets, and exploring hidden gems in India..."
+            ></textarea>
+        </div>
+
+        <button class="generate-btn">Generate Bio</button>
+        
+        <div id="generated-result" style="display:none; margin-top:20px; padding:15px; border:1px solid #a188de; border-radius:8px; color:white; white-space:pre-wrap;"></div>
+    </div>
+</div>
+
+<script>
+    if (performance.getEntriesByType("navigation")[0].type === "reload") {
+        window.location.href = "/"; // Go to Home
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // 1. Find the Button
+        const btn = document.querySelector('.generate-btn');
+        
+        if (!btn) {
+            console.error("Button not found! Check your class names.");
+            return;
+        }
+
+        // 2. Add Click Listener
+        btn.addEventListener('click', async function() {
+            console.log("Button was clicked!"); // Check Console (F12)
+            
+            const inputField = document.getElementById('post-content');
+            const resultBox = document.getElementById('generated-result');
+            const text = inputField.value.trim();
+
+            if (!text) {
+                alert("Please type something first!");
+                return;
+            }
+
+            // 3. UI Loading State
+            const originalText = btn.innerText;
+            btn.innerText = "Generating... ⏳";
+            btn.disabled = true;
+            resultBox.style.display = 'none';
+
+            try {
+                // 4. Call API
+                const response = await fetch('/api/generate/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        text: text, 
+                        type: 'bio' 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.result) {
+                    resultBox.innerText = data.result;
+                    resultBox.style.display = 'block'; // Show result
+                } else {
+                    alert("Error from AI: " + data.error);
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert("Connection Error! Check your terminal to see if Django is running.");
+            } finally {
+                // 5. Reset Button
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
+    });
+</script>
+{% endblock %}

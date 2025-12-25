@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+{% block content %}
+<section class="hero-section">
+    <h3 class="hero-welcome">Welcome to <em>BioGenerator</em></h3>
+    
+    <h1 class="hero-main-title">
+        Boost Your <span class="highlight">Instagram</span> <br>
+        <span class="outline-text">Presence</span>
+    </h1>
+    
+    <p class="hero-subtext">
+        Quickly generate viral captions, profile summaries, and trending hashtags using AI!
+    </p>
+    
+    <div class="hero-buttons">
+        <a href="{% url 'posts' %}" class="btn-hero">Start with a Post</a>
+        <a href="{% url 'bio' %}" class="btn-hero">Write a Bio for Insta</a>
+        <a href="{% url 'hashtag' %}" class="btn-hero">Create Hashtags</a>
+    </div>
+</section>
+{% endblock %}

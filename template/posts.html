@@ -1,0 +1,89 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="main-container">
+    <h1 class="title">
+        Generate Your <span class="highlight">Instagram</span> Post
+    </h1>
+
+    <div class="card">
+        <div class="form-group">
+            <label for="post-content">What's your post about?</label>
+            <textarea 
+                id="post-content" 
+                placeholder="E.g. Just visited a hidden cafe in Shimla. The view of the mountains was unreal and the coffee was perfect..."
+            ></textarea>
+        </div>
+
+        <button class="generate-btn">Generate Post</button>
+        
+        <div id="generated-result" style="display:none; margin-top:20px; padding:15px; border:1px solid #a188de; border-radius:8px; color:white; white-space:pre-wrap;"></div>
+    </div>
+</div>
+
+<script>
+    if (performance.getEntriesByType("navigation")[0].type === "reload") {
+        window.location.href = "/"; 
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // 1. Select the Button
+        const btn = document.querySelector('.generate-btn');
+        
+        if (!btn) {
+            console.error("Button not found!");
+            return;
+        }
+
+        // 2. Add Click Event
+        btn.addEventListener('click', async function() {
+            const inputField = document.getElementById('post-content');
+            const resultBox = document.getElementById('generated-result');
+            const text = inputField.value.trim();
+
+            if (!text) {
+                alert("Please describe your post first!");
+                return;
+            }
+
+            // 3. Show Loading State
+            const originalText = btn.innerText;
+            btn.innerText = "Writing Caption... ✍️";
+            btn.disabled = true;
+            resultBox.style.display = 'none';
+
+            try {
+                // 4. Send Data to Django
+                const response = await fetch('/api/generate/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        text: text, 
+                        type: 'post' // <--- Key change: This tells AI to write a Caption
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.result) {
+                    // 5. Success! Show Result
+                    resultBox.innerText = data.result;
+                    resultBox.style.display = 'block';
+                } else {
+                    alert("Error from AI: " + data.error);
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert("Connection Error! Is your Django server running?");
+            } finally {
+                // 6. Reset Button
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
+    });
+</script>
+{% endblock %}

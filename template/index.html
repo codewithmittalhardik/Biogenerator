@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'logo/favicon1.svg' %}" style="color: black;">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>BioGenerator</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <input type="checkbox" id="check">
+        <label for="check" class="backdrop"></label>
+
+        <div class="logo">
+            <img src="{% static 'logo/favicon.svg' %}" alt="logo">
+            <h1>BioGenerator</h1>
+        </div>
+
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'posts' %}">Posts</a></li>
+            <li><a href="{% url 'bio' %}">Bio</a></li>
+            <li><a href="{% url 'hashtag' %}">Hashtags</a></li>
+        </ul>
+
+        <div class="follow">
+            <a href="https://x.com/HardikMittal149" target="_blank" rel="noopener noreferrer">
+                <span>Follow Me</span> <img src="{% static 'logo/x.svg' %}" alt="">
+            </a>
+        </div>
+
+        <label for="check" class="checkbtn">
+            <div class="box">
+                <img src="{% static 'logo/bar.svg' %}" alt="Menu" style="height: auto; width: 1.5rem;">
+            </div>
+        </label>
+
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        <div class="footer-content">
+
+            <div class="footer-brand">
+                <div class="brand-logo">
+                    <img src="{% static 'logo/favicon.svg' %}" alt="logo">
+                    <h2>BioGenerator</h2>
+                </div>
+                <p class="creator">Made by: Hardik Mittal</p>
+            </div>
+
+            <div class="footer-links">
+
+                <div class="footer-col">
+                    <h4>ABOUT</h4>
+                    <ul>
+                        <li><a href="{% url 'why' %}">Why BioGenerator</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>FOLLOW ME</h4>
+                    <ul>
+                        <li><a href="https://github.com/codewithmittalhardik" target="_blank" rel="noopener noreferrer">Github</a></li>
+                        <li><a href="https://www.linkedin.com/in/mittalhardik/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>LEGAL</h4>
+                    <ul>
+                        <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+                        <li><a href="{% url 'terms' %}">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 BioGenerator™. All Rights Reserved.</p>
+
+            <div class="social-icons">
+                <!-- <a href="#"><i class="fa-brands fa-instagram"></i></a> -->
+                <a href="https://www.reddit.com/user/AdeptHippo9131/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-reddit-alien"></i></a> 
+                <a href="https://x.com/HardikMittal149" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/codewithmittalhardik"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/mittalhardik/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
