@@ -39,11 +39,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
-if (performance.getEntriesByType("navigation")[0].type === "reload") {
-        window.location.href = "{% url 'home' %}"; 
-    }
-
-    // ... The rest of your existing code below ...
-    document.addEventListener('DOMContentLoaded', function() {
-        // ...
-    });

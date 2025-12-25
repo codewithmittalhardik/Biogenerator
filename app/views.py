@@ -7,6 +7,23 @@ from groq import Groq # <--- NEW LIBRARY
 from dotenv import load_dotenv
 load_dotenv()
 
+# --- YOUR PAGE VIEWS ---
+def home(request): 
+    return render(request, 'home.html')
+def why(request): 
+    return render(request, 'why.html')
+def about(request): 
+    return render(request, 'about.html')
+def privacy(request): 
+    return render(request, 'privacy.html')
+def terms(request): 
+    return render(request, 'terms.html')
+def bio(request): 
+    return render(request, 'bio.html')
+def hashtags(request): 
+    return render(request, 'hashtag.html')
+def posts(request): 
+    return render(request, 'posts.html')
 
 # --- PASTE YOUR GROQ API KEY HERE ---
 # Get it for free at: https://console.groq.com/keys
@@ -40,7 +57,6 @@ def generate_ai_content(request):
                         "content": prompt,
                     }
                 ],
-                # ✅ UPDATED to the newest working model
                 model="llama-3.1-8b-instant", 
             )
 
@@ -52,13 +68,3 @@ def generate_ai_content(request):
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
-
-# --- YOUR PAGE VIEWS ---
-def home(request): return render(request, 'home.html')
-def why(request): return render(request, 'why.html')
-def about(request): return render(request, 'about.html')
-def privacy(request): return render(request, 'privacy.html')
-def terms(request): return render(request, 'terms.html')
-def bio(request): return render(request, 'bio.html')
-def hashtags(request): return render(request, 'hashtag.html')
-def posts(request): return render(request, 'posts.html')
