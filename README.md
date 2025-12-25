@@ -37,8 +37,8 @@ Ensure you have Python installed on your system:
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/codewithmittalhardik/Biogenerator.git]((https://github.com/codewithmittalhardik/Biogenerator.git)
-    cd repo-name
+    git clone (https://github.com/codewithmittalhardik/Biogenerator.git)
+    cd Biogenerator
     ```
 
 2.  **Create a Virtual Environment**
