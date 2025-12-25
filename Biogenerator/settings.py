@@ -28,7 +28,7 @@ DEBUG = True
 # settings.py
 
 # Replace 'your-app-name' with your actual Render project name
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
