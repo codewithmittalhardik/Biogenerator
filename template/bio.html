@@ -9,15 +9,13 @@
     <div class="card">
         <div class="form-group">
             <label for="post-content">What's your bio about?</label>
-            <textarea 
-                id="post-content" 
-                placeholder="E.g. I'm a travel photographer who loves coffee, sunsets, and exploring hidden gems in India..."
-            ></textarea>
+            <textarea id="post-content"
+                placeholder="E.g. I'm a travel photographer who loves coffee, sunsets, and exploring hidden gems in India..."></textarea>
         </div>
 
         <button class="generate-btn">Generate Bio</button>
-        
-        <div id="generated-result" style="display:none; margin-top:20px; padding:15px; border:1px solid #a188de; border-radius:8px; color:white; white-space:pre-wrap;"></div>
+
+        <div id="generated-result"></div>
     </div>
 </div>
 
@@ -25,20 +23,20 @@
     if (performance.getEntriesByType("navigation")[0].type === "reload") {
         window.location.href = "/"; // Go to Home
     }
-    document.addEventListener('DOMContentLoaded', function() {
-        
+    document.addEventListener('DOMContentLoaded', function () {
+
         // 1. Find the Button
         const btn = document.querySelector('.generate-btn');
-        
+
         if (!btn) {
             console.error("Button not found! Check your class names.");
             return;
         }
 
         // 2. Add Click Listener
-        btn.addEventListener('click', async function() {
+        btn.addEventListener('click', async function () {
             console.log("Button was clicked!"); // Check Console (F12)
-            
+
             const inputField = document.getElementById('post-content');
             const resultBox = document.getElementById('generated-result');
             const text = inputField.value.trim();
@@ -61,9 +59,9 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ 
-                        text: text, 
-                        type: 'bio' 
+                    body: JSON.stringify({
+                        text: text,
+                        type: 'bio'
                     })
                 });
 
